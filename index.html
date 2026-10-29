@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Diwali • Rocket Launch Calculator</title>
+<style>
+:root{--gold:#ffdc78;--orange:#ff842e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:system-ui,Arial,sans-serif;color:white;background:radial-gradient(ellipse at 50% 0%,#52205f 0,#1b1033 43%,#070812 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.65;background-image:radial-gradient(#ffe5a0 1px,transparent 1.6px),radial-gradient(#fff 1px,transparent 1.6px);background-size:73px 73px,113px 113px;background-position:0 0,35px 22px;animation:twinkle 4s linear infinite}
+@keyframes twinkle{50%{opacity:.2}}
+.page{position:relative;z-index:1;width:min(100% - 24px,460px);margin:auto;padding:24px 0 34px}
+.hero{text-align:center;margin-bottom:18px}
+.hero .lamp{font-size:32px;filter:drop-shadow(0 0 12px #ffad42)}
+h1{margin:5px 0;color:var(--gold);font-size:clamp(30px,8vw,42px);text-shadow:0 0 20px #ff8a2470}
+.hero p{color:#ffe7be;font-size:14px;margin:8px 0}
+.panel{border:1px solid #ffd56b55;border-radius:25px;padding:20px;background:linear-gradient(145deg,#2c1745ef,#101022ed);box-shadow:0 18px 55px #0008,inset 0 1px #ffffff18}
+label{display:block;margin:12px 0 7px;color:#ffe7be;font-size:13px}
+input[type=text]{width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffd56b66;background:#090817;color:white;font-size:16px;outline:none}
+input[type=file]{width:100%;font-size:12px;color:#ffe7be}
+.preview{display:none;width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid var(--gold);margin:12px auto 0;box-shadow:0 0 24px #ffb52d66}
+.rocket-stage{position:relative;display:flex;justify-content:center;align-items:center;min-height:190px;margin:12px 0 2px;overflow:visible}
+.rocket-button{position:relative;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;color:white;padding:4px 20px;touch-action:manipulation}
+.rocket-icon{display:block;font-size:clamp(88px,25vw,122px);line-height:1.05;filter:drop-shadow(0 0 13px #ff9d36) drop-shadow(0 0 27px #ff5b9d66);transform:rotate(-38deg);transition:filter .2s}
+.rocket-button:hover .rocket-icon{filter:drop-shadow(0 0 18px #ffd56b) drop-shadow(0 0 35px #ff5b9d)}
+.rocket-label{font-weight:900;font-size:14px;letter-spacing:1.2px;color:var(--gold);text-shadow:0 2px 9px #000}
+.rocket-hint{font-size:11px;color:#e2d4f2;text-align:center;margin-top:-3px}
+.rocket-button.launched{animation:fly 1.5s cubic-bezier(.2,.7,.2,1) forwards;pointer-events:none}
+@keyframes fly{0%{transform:translateY(0) scale(1);opacity:1}15%{transform:translateY(8px) scale(.96)}65%{transform:translateY(-70vh) scale(.62);opacity:1}100%{transform:translateY(-110vh) scale(.2);opacity:0}}
+.explosion{position:fixed;left:50%;top:35%;width:12px;height:12px;border-radius:50%;z-index:9;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.1)}
+.explosion.go{animation:boom 1.15s ease-out forwards}
+@keyframes boom{0%{opacity:1;transform:translate(-50%,-50%) scale(.1);box-shadow:0 0 0 0 #ffdd66}20%{opacity:1;transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 18px #ffb32d,0 0 0 38px #ff6b5c,0 0 0 58px #ffdc7844,0 0 70px 35px #ffb32d}100%{opacity:0;transform:translate(-50%,-50%) scale(2.4);box-shadow:0 0 0 80px #ffdc7800,0 0 0 120px #ff6b5c00,0 0 0 160px #ffdc7800,0 0 100px 70px #ffb32d00}}
+.greeting{display:none;text-align:center;margin-top:22px;animation:appear .9s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.greeting h2{font-size:clamp(31px,8vw,43px);line-height:1.1;color:var(--gold);margin:12px 0;text-shadow:0 0 18px #ff8a24}
+.greet-photo{display:none;width:125px;height:125px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);margin:8px auto;box-shadow:0 0 28px #ffb52d75}
+.wish{font-size:17px;color:#fff1cf;line-height:1.5}
+.panel.calc{display:none;margin-top:20px}
+.calc-title{text-align:center;color:var(--gold);font-size:20px;font-weight:800;margin:0 0 13px}
+.screen{background:#080814;border-radius:15px;min-height:84px;padding:13px;margin-bottom:12px;text-align:right;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+#history{color:#b5a8c8;font-size:12px;min-height:17px;overflow-wrap:anywhere}
+#display{font-size:34px;font-weight:750;overflow-wrap:anywhere}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.keys button{height:51px;border:1px solid #ffffff12;border-radius:12px;background:#ffffff13;color:white;font-size:19px;font-weight:700;cursor:pointer}
+.keys button:hover{background:#ffffff28}
+.keys .op,.keys .util{color:var(--gold);background:#ffb52d18}
+.keys .eq{background:linear-gradient(120deg,#ffd56b,#ff8a24);color:#2b1120}
+.keys .zero{grid-column:span 2}
+.social-share{margin-top:18px;padding-top:15px;border-top:1px solid #ffd56b33;text-align:center}
+.social-share p{font-size:13px;color:#ffe7be;margin:0 0 10px}
+.social-buttons{display:grid;grid-template-columns:1fr;gap:9px}
+.social-buttons button{border:0;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:800;cursor:pointer;color:white;background:#1877f2;box-shadow:0 5px 16px #0003}
+.social-buttons button.copy-post{background:linear-gradient(120deg,#ffd56b,#ff8a24);color:#2b1120}
+.social-buttons button:active{transform:scale(.99)}
+.note{text-align:center;color:#c8b6db;font-size:11px;margin-top:16px}
+.confetti{position:fixed;top:-20px;z-index:8;font-size:22px;pointer-events:none;animation:fall 2.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@media(max-width:360px){.panel{padding:15px}.keys{gap:6px}.keys button{height:47px}.rocket-stage{min-height:165px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <div class="lamp">🪔 ✨ 🪔</div>
+    <h1>Happy Diwali</h1>
+    <p>Naam aur photo lagao, phir rocket launch karo! 🎆</p>
+  </header>
+
+  <section class="panel" id="formPanel">
+    <label for="personName">Aapka naam</label>
+    <input id="personName" type="text" maxlength="40" placeholder="Jaise: Sunil Patel" autocomplete="name">
+    <label for="personPhoto">Apni photo upload karein (optional)</label>
+    <input id="personPhoto" type="file" accept="image/*">
+    <img class="preview" id="preview" alt="Photo preview">
+
+    <div class="rocket-stage">
+      <button class="rocket-button" id="launchBtn" type="button" aria-label="Launch rocket">
+        <span class="rocket-icon" id="rocketIcon">🚀</span>
+        <span class="rocket-label">ROCKET KO CLICK KAREIN</span>
+        <span class="rocket-hint">Naam bharne ke baad rocket launch karein</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="explosion" id="explosion"></div>
+
+  <section class="greeting" id="greeting">
+    <div style="font-size:27px">✨ 🪔 🎆 🪔 ✨</div>
+    <img class="greet-photo" id="greetPhoto" alt="Your photo">
+    <h2><span id="welcomeName">Dost</span><br>ki taraf se<br>Happy Diwali!</h2>
+    <div class="wish">Aapki zindagi khushiyon, roshni<br>aur tarakki se jagmagaye! 🪔</div>
+    <div style="font-size:27px;margin-top:12px">🎇 ✨ 🎇</div>
+  </section>
+
+  <section class="panel calc" id="calcPanel">
+    <h3 class="calc-title">🧮 <span id="calcName">Your</span> Calculator</h3>
+    <div class="screen"><div id="history"></div><div id="display">0</div></div>
+    <div class="keys">
+      <button class="util" data-action="clear">AC</button><button class="util" data-action="del">DEL</button><button class="util" data-value="%">%</button><button class="op" data-value="/">÷</button>
+      <button data-value="7">7</button><button data-value="8">8</button><button data-value="9">9</button><button class="op" data-value="*">×</button>
+      <button data-value="4">4</button><button data-value="5">5</button><button data-value="6">6</button><button class="op" data-value="-">−</button>
+      <button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button><button class="op" data-value="+">+</button>
+      <button class="zero" data-value="0">0</button><button data-value=".">.</button><button class="eq" data-action="equals">=</button>
+    </div>
+    <div class="social-share">
+      <p>🎉 Pehle apni Diwali post taiyar karein, phir Facebook par share karein!</p>
+      <div class="social-buttons">
+        <button type="button" class="copy-post" id="prepareFacebookPost">📝 Step 1: Diwali Post Taiyar Karein</button>
+        <div id="postPreviewWrap" style="display:none;text-align:left;background:#ffffff12;border:1px solid #ffd56b55;border-radius:12px;padding:12px;margin-top:4px">
+          <p style="margin:0 0 8px;font-weight:800;color:#ffe7be">Aapki post ka text:</p>
+          <textarea id="facebookPostPreview" readonly style="width:100%;min-height:110px;box-sizing:border-box;border-radius:8px;padding:10px;border:1px solid #ffd56b55;background:#160b27;color:#fff;font:inherit;resize:vertical"></textarea>
+          <button type="button" id="copyPreparedPost" style="margin-top:8px;width:100%;background:#ffd56b;color:#2b1120">📋 Post Text Copy Karein</button>
+        </div>
+        <button type="button" id="facebookShare" disabled style="opacity:.5;cursor:not-allowed">📘 Step 2: Facebook par Share Karein</button>
+        <p id="shareStatus" aria-live="polite" style="margin:4px 0 0;color:#ffe7be;font-size:12px">Pehle Step 1 dabayein. Uske baad Share button active hoga.</p>
+      </div>
+    </div>
+  </section>
+  <p class="note">✨ Diwali wishes made with love ✨</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let selectedPhoto='',expr='',solved=false,launching=false;
+$('personPhoto').addEventListener('change',()=>{
+ const f=$('personPhoto').files[0];
+ if(!f){selectedPhoto='';$('preview').style.display='none';return}
+ if(!f.type.startsWith('image/')){alert('Please image file chunein.');return}
+ const r=new FileReader();r.onload=()=>{selectedPhoto=r.result;$('preview').src=selectedPhoto;$('preview').style.display='block'};r.readAsDataURL(f);
+});
+function confetti(){
+ const bits=['✨','🎆','🎇','💥','⭐','🪔'];
+ for(let i=0;i<42;i++){
+  const el=document.createElement('span');el.className='confetti';el.textContent=bits[Math.floor(Math.random()*bits.length)];
+  el.style.left=Math.random()*100+'vw';el.style.animationDelay=(Math.random()*.55)+'s';el.style.fontSize=(16+Math.random()*20)+'px';
+  document.body.appendChild(el);setTimeout(()=>el.remove(),3500);
+ }
+}
+$('launchBtn').addEventListener('click',()=>{
+ if(launching)return;
+ const name=$('personName').value.trim();
+ if(!name){$('personName').focus();alert('Bhai, pehle apna naam likho 😊');return}
+ launching=true;
+ $('launchBtn').classList.add('launched');
+ setTimeout(()=>{
+   $('explosion').classList.add('go');confetti();
+ },850);
+ setTimeout(()=>{
+   $('formPanel').style.display='none';
+   $('welcomeName').textContent=name;$('calcName').textContent=name;
+   if(selectedPhoto){$('greetPhoto').src=selectedPhoto;$('greetPhoto').style.display='block'}
+   $('greeting').style.display='block';$('calcPanel').style.display='block';
+   window.scrollTo({top:0,behavior:'smooth'});
+ },1800);
+});
+function draw(){$('display').textContent=expr||'0'}
+function add(v){
+ if(solved&&/[0-9.]/.test(v)){expr='';solved=false}
+ if(v==='%'){if(expr)expr+='%' ;draw();return}
+ if(v==='.'){let c=expr.split(/[+\-*/]/).pop();if(c.includes('.'))return;if(!c)expr+='0'}
+ if(/[+\-*/]/.test(v)&&!expr&&v!=='-')return;
+ if(/[+\-*/]/.test(v)&&/[+\-*/]$/.test(expr))expr=expr.slice(0,-1);
+ expr+=v;$('history').textContent='';draw()
+}
+function evaluate(s){
+ if(!/^[0-9+\-*/.()%\s]+$/.test(s))throw Error();
+ s=s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
+ const n=Function('"use strict";return ('+s+')')();if(!Number.isFinite(n))throw Error();return n
+}
+function calculate(){
+ if(!expr)return;
+ try{const old=expr,n=evaluate(expr);$('history').textContent=old.replace(/\*/g,'×').replace(/\//g,'÷')+' =';expr=String(Number(n.toPrecision(12)));draw();solved=true}
+ catch{$('display').textContent='Error';$('history').textContent='Calculation check karein';expr='';solved=true}
+}
+document.querySelector('.keys').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.action==='clear'){expr='';$('history').textContent='';solved=false;draw()}
+ else if(b.dataset.action==='del'){expr=expr.slice(0,-1);solved=false;draw()}
+ else if(b.dataset.action==='equals')calculate();else add(b.dataset.value)
+});
+function getShareText(){
+ const name=$('personName').value.trim() || $('welcomeName').textContent || 'Dost';
+ return `🪔 ${name} ki taraf se aap sabhi ko Happy Diwali! 🎆\\nAapki zindagi khushiyon, roshni aur tarakki se jagmagaye! ✨\\n\\nMeri Diwali Rocket Calculator website dekhein: ${window.location.href}`;
+}
+let preparedPostText='';
+$('prepareFacebookPost').addEventListener('click',()=>{
+ preparedPostText=getShareText();
+ $('facebookPostPreview').value=preparedPostText;
+ $('postPreviewWrap').style.display='block';
+ $('facebookShare').disabled=false;
+ $('facebookShare').style.opacity='1';
+ $('facebookShare').style.cursor='pointer';
+ $('shareStatus').textContent='Post taiyar hai! Chahein to text copy karein, phir Step 2 dabayein.';
+});
+$('copyPreparedPost').addEventListener('click',async()=>{
+ if(!preparedPostText)return;
+ try{
+   await navigator.clipboard.writeText(preparedPostText);
+   $('shareStatus').textContent='Post text copy ho gaya. Facebook par paste kar sakte hain!';
+ }catch(err){
+   window.prompt('Is text ko copy karke Facebook par paste karein:',preparedPostText);
+ }
+});
+$('facebookShare').addEventListener('click',()=>{
+ if(!preparedPostText){
+   $('shareStatus').textContent='Pehle Step 1: Diwali Post Taiyar Karein dabayein.';
+   return;
+ }
+ const pageUrl=window.location.href;
+ if(!/^https?:$/.test(window.location.protocol)){
+   alert('Bhai, pehle website ko GitHub Pages par publish karein. Phir live website se Facebook share button kaam karega 😊');
+   return;
+ }
+ const shareUrl='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageUrl);
+ window.open(shareUrl,'facebook-share','width=650,height=520,noopener,noreferrer');
+ $('shareStatus').textContent='Facebook share window khul gayi. Wahan post ko khud confirm karke publish karein.';
+});
+document.addEventListener('keydown',e=>{
+ if($('calcPanel').style.display!=='block')return;
+ if(/^[0-9.]$/.test(e.key))add(e.key);
+ else if(['+','-','*','/'].includes(e.key))add(e.key);
+ else if(e.key==='Enter'||e.key==='='){e.preventDefault();calculate()}
+ else if(e.key==='Backspace'){expr=expr.slice(0,-1);draw()}
+ else if(e.key==='Escape'){expr='';$('history').textContent='';draw()}
+});
+</script>
+</body>
+</html>
