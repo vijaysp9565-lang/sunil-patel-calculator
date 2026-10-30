@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vijay AI Studio — Text to Video</title>
+<meta name="description" content="Create AI video ideas for Shorts, Reels and more with Vijay AI Studio.">
+<style>
+:root{color-scheme:dark;--bg:#080a14;--panel:#111528;--line:#282d48;--text:#f5f6ff;--muted:#a8aec9;--pink:#f46bc7;--blue:#7b8cff;--mint:#6ce5ca}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#2b1b54 0,transparent 42%),radial-gradient(ellipse at 95% 12%,#123b4c 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.wrap{width:min(1100px,calc(100% - 32px));margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:16px}.brand{font-weight:900;letter-spacing:.2px;font-size:20px}.brand span{color:var(--pink)}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--mint);font-size:12px;background:#111528b8}
+.hero{text-align:center;padding:48px 0 30px}.eyebrow{color:var(--mint);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}.hero h1{font-size:clamp(38px,7vw,70px);line-height:1.04;letter-spacing:-2px;margin:16px auto;max-width:800px}.grad{background:linear-gradient(90deg,#f46bc7,#9b8cff,#6ce5ca);background-clip:text;color:transparent}.hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:17px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:20px;align-items:start;margin:28px 0 60px}.card{border:1px solid var(--line);background:linear-gradient(145deg,#151a30ed,#0f1222f5);border-radius:22px;padding:22px;box-shadow:0 20px 60px #0003}.card h2{font-size:20px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 20px}label{display:block;font-size:13px;font-weight:700;color:#dce0f7;margin:16px 0 8px}textarea,select,input{width:100%;border:1px solid #303653;border-radius:12px;background:#090d1a;color:var(--text);padding:12px 13px;font:inherit;outline:none}textarea{min-height:135px;resize:vertical}textarea:focus,select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #7b8cff20}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.format{border:1px solid #303653;border-radius:12px;padding:10px;text-align:center;background:#0b1020;cursor:pointer;font-size:13px}.format input{width:auto;margin:0 4px 0 0}.format:has(input:checked){border-color:var(--pink);background:#f46bc711}.btn{border:0;border-radius:13px;padding:14px 18px;width:100%;font:inherit;font-weight:800;cursor:pointer;background:linear-gradient(100deg,var(--pink),#9285ff 60%,var(--mint));color:#0a0b16;margin-top:18px}.btn:disabled{opacity:.6;cursor:not-allowed}.secondary{background:#1b213a;color:#eef0ff;border:1px solid #343b5d}.preview{min-height:365px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed #363d5f;border-radius:17px;background:radial-gradient(ellipse at center,#22244a77,transparent 70%),#0a0e1c;padding:20px}.preview .icon{font-size:56px;filter:drop-shadow(0 0 22px #9b8cff55)}.preview h3{margin:12px 0 5px}.preview p{color:var(--muted);font-size:13px;max-width:310px;margin:0}.notice{margin-top:15px;border-radius:12px;padding:12px 13px;background:#f5b94c12;border:1px solid #f5b94c40;color:#ffe0a0;font-size:12px}.status{margin-top:12px;color:var(--muted);font-size:13px;min-height:22px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 60px}.feature{border:1px solid var(--line);background:#111528a8;border-radius:16px;padding:17px}.feature b{display:block;margin:8px 0 4px}.feature p{margin:0;color:var(--muted);font-size:13px}.footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding-top:30px}.feature-grid{grid-template-columns:1fr}.preview{min-height:260px}.card{padding:17px}}@media(max-width:420px){.row{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><div class="brand">✦ Vijay <span>AI Studio</span></div><div class="pill">AI CREATION WORKSPACE</div></nav>
+<header class="hero"><div class="eyebrow">Your imagination, in motion</div><h1>Text se banao apni <span class="grad">next video</span></h1><p>Shorts, Reels, cinematic scenes aur creative concepts ke liye apna prompt taiyar karein.</p></header>
+<main class="layout">
+<section class="card"><h2>🎬 Create a video</h2><p class="sub">Apni imagination ko prompt mein likhein.</p>
+<label for="prompt">Video prompt</label><textarea id="prompt" maxlength="1200" placeholder="Example: Golden-hour mein pahadon ke upar udta hua eagle, cinematic camera movement, realistic details..."></textarea>
+<div class="row"><div><label for="style">Visual style</label><select id="style"><option>Cinematic realistic</option><option>Nature & wildlife</option><option>Anime</option><option>3D animation</option><option>Fantasy</option><option>Product commercial</option></select></div><div><label for="duration">Duration</label><select id="duration"><option value="5">5 seconds</option><option value="10">10 seconds</option><option value="30">30 seconds (if supported)</option><option value="60">60 seconds (if supported)</option></select></div></div>
+<label>Video format</label><div class="formats"><label class="format"><input type="radio" name="ratio" value="9:16" checked>📱 Vertical</label><label class="format"><input type="radio" name="ratio" value="16:9">🖥️ Landscape</label><label class="format"><input type="radio" name="ratio" value="1:1">⬜ Square</label></div>
+<label for="language">Prompt language</label><select id="language"><option>Hindi / Hinglish</option><option>English</option></select>
+<button class="btn" id="generate">✨ Generate AI Video</button>
+<div class="status" id="status" aria-live="polite"></div>
+<div class="notice"><b>Important:</b> Ye public demo page abhi AI video model se connected nahi hai. Asli video generate karne ke liye secure server/API setup zaroori hai; secret API keys ko public HTML mein nahi rakha jayega.</div>
+</section>
+<section class="card"><h2>🪄 Your creation</h2><p class="sub">Generated video yahan preview hoga.</p><div class="preview" id="preview"><div class="icon">🎞️</div><h3>Your video will appear here</h3><p>Prompt likhein aur generate button dabayein. Live AI generation server connect hone ke baad yahan video preview aur download milega.</p></div><button class="btn secondary" id="download" disabled>⬇ Download video</button><button class="btn secondary" id="share">↗ Share this studio</button></section>
+</main>
+<section class="feature-grid"><div class="feature"><span>🎥</span><b>Text to Video</b><p>Prompt-based video creation ke liye ready interface.</p></div><div class="feature"><span>📲</span><b>Shorts & Reels</b><p>Vertical, square aur landscape format options.</p></div><div class="feature"><span>🖼️</span><b>Creative styles</b><p>Realistic, nature, anime aur cinematic prompt presets.</p></div></section>
+<footer class="footer"><span>© <span id="year"></span> Vijay AI Studio</span><span>Made for creators • Free hosting via GitHub Pages</span></footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('year').textContent=new Date().getFullYear();
+$('generate').addEventListener('click',()=>{
+ const prompt=$('prompt').value.trim();
+ if(!prompt){$('status').textContent='Bhai, pehle apna video prompt likho.';$('prompt').focus();return}
+ $('status').textContent='Prompt ready hai. AI generation abhi active nahi hai kyunki secure AI backend/API connect karna baaki hai.';
+ $('preview').innerHTML='<div class="icon">🧩</div><h3>AI service connection required</h3><p>Prompt saved in this page session. Next step: secure backend aur available AI video model connect karna.</p>';
+});
+$('share').addEventListener('click',async()=>{
+ const url=location.href;
+ try{if(navigator.share){await navigator.share({title:'Vijay AI Studio',text:'Text-to-video studio dekho!',url})}else{await navigator.clipboard.writeText(url);$('status').textContent='Website link copy ho gaya.'}}
+ catch(e){$('status').textContent='Share cancel hua ya browser ne share allow nahi kiya.'}
+});
+</script>
+</body></html>
