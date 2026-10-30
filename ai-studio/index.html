@@ -2,8 +2,8 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vijay AI Studio — Text to Video</title>
-<meta name="description" content="Create AI video ideas for Shorts, Reels and more with Vijay AI Studio.">
+<title>SPT AI Studio — Text to Video</title>
+<meta name="description" content="Create AI video ideas for Shorts, Reels and more with SPT AI Studio.">
 <style>
 :root{color-scheme:dark;--bg:#080a14;--panel:#111528;--line:#282d48;--text:#f5f6ff;--muted:#a8aec9;--pink:#f46bc7;--blue:#7b8cff;--mint:#6ce5ca}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#2b1b54 0,transparent 42%),radial-gradient(ellipse at 95% 12%,#123b4c 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="wrap">
-<nav class="nav"><div class="brand">✦ Vijay <span>AI Studio</span></div><div class="pill">AI CREATION WORKSPACE</div></nav>
+<nav class="nav"><div class="brand">✦ SPT <span>AI Studio</span></div><div class="pill">AI CREATION WORKSPACE</div></nav>
 <header class="hero"><div class="eyebrow">Your imagination, in motion</div><h1>Text se banao apni <span class="grad">next video</span></h1><p>Shorts, Reels, cinematic scenes aur creative concepts ke liye apna prompt taiyar karein.</p></header>
 <main class="layout">
 <section class="card"><h2>🎬 Create a video</h2><p class="sub">Apni imagination ko prompt mein likhein.</p>
@@ -30,7 +30,7 @@
 <section class="card"><h2>🪄 Your creation</h2><p class="sub">Generated video yahan preview hoga.</p><div class="preview" id="preview"><div class="icon">🎞️</div><h3>Your video will appear here</h3><p>Prompt likhein aur generate button dabayein. Live AI generation server connect hone ke baad yahan video preview aur download milega.</p></div><button class="btn secondary" id="download" disabled>⬇ Download video</button><button class="btn secondary" id="share">↗ Share this studio</button></section>
 </main>
 <section class="feature-grid"><div class="feature"><span>🎥</span><b>Text to Video</b><p>Prompt-based video creation ke liye ready interface.</p></div><div class="feature"><span>📲</span><b>Shorts & Reels</b><p>Vertical, square aur landscape format options.</p></div><div class="feature"><span>🖼️</span><b>Creative styles</b><p>Realistic, nature, anime aur cinematic prompt presets.</p></div></section>
-<footer class="footer"><span>© <span id="year"></span> Vijay AI Studio</span><span>Made for creators • Free hosting via GitHub Pages</span></footer>
+<footer class="footer"><span>© <span id="year"></span> SPT AI Studio</span><span>Made for creators • Free hosting via GitHub Pages</span></footer>
 </div>
 <script>
 const $=id=>document.getElementById(id);
@@ -43,7 +43,7 @@ $('generate').addEventListener('click',()=>{
 });
 $('share').addEventListener('click',async()=>{
  const url=location.href;
- try{if(navigator.share){await navigator.share({title:'Vijay AI Studio',text:'Text-to-video studio dekho!',url})}else{await navigator.clipboard.writeText(url);$('status').textContent='Website link copy ho gaya.'}}
+ try{if(navigator.share){await navigator.share({title:'SPT AI Studio',text:'Text-to-video studio dekho!',url})}else{await navigator.clipboard.writeText(url);$('status').textContent='Website link copy ho gaya.'}}
  catch(e){$('status').textContent='Share cancel hua ya browser ne share allow nahi kiya.'}
 });
 </script>
